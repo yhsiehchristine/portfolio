@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品集 | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ================= 基礎配色與全域設定 ================= */
+        :root {
+            --page-bg: #D9DCD6;       /* 最淺色：大背景 */
+            --primary-bg: #ffffff;    /* 履歷主體背景：保持白色以確保閱讀性 */
+            --sidebar-bg: #0D2C54;    /* 深藍色：側邊欄背景與主標題 */
+            --accent-color: #00A6ED;  /* 亮藍色：點綴色、箭頭、重點線條 */
+            --text-main: #3E2B07;     /* 深棕色：主要內文文字 */
+            --text-light: #A9927D;    /* 淺棕色：日期與次要文字 */
+            --border-color: #D9DCD6;  /* 邊框顏色 */
+            --spacing: 30px;
+            --workflow-green: #61988A; 
+            --workflow-dark: #2B3D4F;  
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--page-bg);
+            color: var(--text-main);
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .portfolio-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--primary-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 40px var(--spacing);
+        }
+
+        h1 {
+            color: var(--sidebar-bg);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--sidebar-bg);
+            font-size: 1.5rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+        }
+
+        h3 {
+            color: var(--text-main);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        p { margin-bottom: 15px; color: var(--text-main); }
+        .text-light { color: var(--text-light); font-size: 0.9rem; }
+        
+        .project-card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: var(--spacing);
+            background-color: #fafafa;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: var(--sidebar-bg);
+        }
+
+        /* ================= 社群平台獨立展示卡片 ================= */
+        .social-section-title {
+            text-align: center; font-weight: bold; color: var(--sidebar-bg); margin-top: 40px; margin-bottom: 20px; font-size: 1.2rem; border-bottom: 2px dashed var(--border-color); padding-bottom: 10px;
+        }
+        .social-platform-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .social-platform-text {
+            flex: 0 0 280px; /* 固定文字區寬度 */
+        }
+        .social-platform-text h4 {
+            font-size: 1.1rem;
+            color: var(--sidebar-bg);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .social-platform-media {
+            flex: 1; /* 讓圖片區自動延伸 */
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+        }
+        .social-platform-media img {
+            border-radius: 8px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            object-fit: cover;
+            transition: 0.3s;
+        }
+        .social-platform-media img:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        
+        /* ================= 影片預留框樣式 ================= */
+        .video-placeholder {
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            width: 250px;
+            height: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* ================= 品牌識別 Logo 圖片樣式 ================= */
+        .branding-logo-box {
+            text-align: center; 
+            margin-top: 25px; 
+            margin-bottom: 10px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .branding-logo-box img {
+            max-width: 100%; 
+            max-height: 220px; 
+            object-fit: contain;
+            cursor: zoom-in;
+            transition: 0.3s;
+        }
+        .branding-logo-box img:hover {
+            transform: scale(1.02);
+        }
+        .logo-label {
+            margin-top: 12px;
+            color: var(--text-light);
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* ================= 文案預覽卡片 ================= */
+        .article-preview-card {
+            background: #ffffff; border-left: 5px solid var(--accent-color); padding: 25px; border-radius: 0 8px 8px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.06); margin-top: 25px; margin-bottom: 30px; position: relative;
+        }
+        .article-meta-tag {
+            display: inline-block; background: rgba(0, 166, 237, 0.1); color: var(--accent-color); font-weight: bold; font-size: 0.85rem; padding: 5px 12px; border-radius: 20px; margin-bottom: 15px;
+        }
+        .article-title { font-size: 1.3rem; color: var(--sidebar-bg); margin-bottom: 10px; font-weight: bold; }
+        .article-excerpt { color: #666; font-size: 0.95rem; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 20px; }
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .preview-btn { background-color: var(--accent-color); color: #fff; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px; }
+        .preview-btn:hover { background-color: #008Bc7; transform: translateY(-2px); }
+        .external-link-btn { background-color: transparent; color: var(--accent-color); border: 2px solid var(--accent-color); padding: 8px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .external-link-btn:hover { background-color: rgba(0, 166, 237, 0.1); }
+
+        /* ================= 橫向滾動圖片畫廊 ================= */
+        .image-production-section { background: #fdfdfd; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color); }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .swipe-hint { font-size: 0.9rem; color: #888; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 0.6; transform: translateX(0); } 50% { opacity: 1; transform: translateX(5px); } 100% { opacity: 0.6; transform: translateX(0); } }
+        
+        .horizontal-scroll-container { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px; scroll-snap-type: x mandatory; }
+        .horizontal-scroll-container::-webkit-scrollbar { height: 8px; }
+        .horizontal-scroll-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+        
+        .scroll-img { flex: 0 0 auto; height: 320px; width: auto; max-width: 90vw; object-fit: contain; border-radius: 8px; border: 1px solid #eaeaea; background: #fff; cursor: pointer; scroll-snap-align: start; transition: 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .scroll-img:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-color: var(--accent-color); }
+
+        /* ================= 互動式流程圖 ================= */
+        .workflow-title-box { text-align: center; margin: 30px 0 20px 0; color: var(--workflow-dark); font-size: 1.4rem; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .workflow-title-box::before, .workflow-title-box::after { content: ''; display: block; width: 50px; height: 2px; background-color: var(--workflow-green); }
+        .workflow-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; gap: 10px; }
+        .workflow-step { border: 2px solid var(--workflow-green); border-radius: 12px; padding: 15px 10px; background: #fff; text-align: center; width: 130px; position: relative; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; }
+        .step-number { background-color: var(--workflow-green); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; margin-bottom: 15px; transition: 0.3s; }
+        .step-icon { font-size: 2.5rem; color: var(--workflow-dark); margin-bottom: 15px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .step-divider { border-top: 3px dotted var(--workflow-green); width: 80%; margin: 10px auto; opacity: 0.5; }
+        .step-title { color: var(--workflow-dark); font-weight: bold; font-size: 0.95rem; }
+        .step-subtitle { color: var(--workflow-dark); font-size: 0.85rem; }
+        .workflow-arrow { color: var(--workflow-green); font-size: 1.2rem; }
+        .clickable-step { cursor: pointer; }
+        .clickable-step:hover { transform: translateY(-8px); box-shadow: 0 10px 20px rgba(97, 152, 138, 0.25); border-color: var(--accent-color); }
+        .clickable-step:hover .step-number { background-color: var(--accent-color); }
+        .clickable-step::after { content: '\f00e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: -10px; right: -10px; background: var(--accent-color); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; opacity: 0; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .clickable-step:hover::after { opacity: 1; }
+
+        /* ================= 圖片/文章彈出視窗 (Modal共用外觀) ================= */
+        .image-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); align-items: center; justify-content: center; flex-direction: column; }
+        .modal-content { max-width: 90%; max-height: 85vh; border-radius: 8px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease; }
+        .close-modal { position: absolute; top: 15px; right: 25px; color: #888; font-size: 35px; font-weight: bold; cursor: pointer; transition: 0.2s; z-index: 10; }
+        .close-modal:hover { color: var(--accent-color); }
+        .modal-hint { color: white; margin-top: 15px; font-size: 0.9rem; opacity: 0.7; }
+        @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .article-modal-content { background: #fff; max-width: 700px; width: 95%; padding: 40px; border-radius: 12px; position: relative; max-height: 85vh; overflow-y: auto; line-height: 1.8; color: var(--text-main); animation: zoomIn 0.3s ease; }
+        .article-modal-content h2 { margin-top: 0; color: var(--sidebar-bg); font-size: 1.6rem; margin-bottom: 10px; border-left: none; padding-left: 0; }
+        .article-body p { font-size: 1.05rem; margin-bottom: 15px; text-align: justify; }
+        .article-body ul { padding-left: 20px; margin-bottom: 15px; }
+        .article-body li { margin-bottom: 10px; }
+
+        /* ================= 仿小紅書動態卡片設計 ================= */
+        .xhs-mockup { display: flex; background-color: #121212; color: #ffffff; border-radius: 12px; overflow: hidden; margin-top: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); max-width: 800px; margin-left: auto; margin-right: auto; height: 550px; }
+        .xhs-carousel-container { width: 50%; height: 100%; position: relative; background-color: #000; display: flex; align-items: center; overflow: hidden; }
+        .xhs-slides-track { display: flex; width: 100%; height: 100%; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .xhs-slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000; }
+        .xhs-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .xhs-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); color: white; border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; backdrop-filter: blur(4px); z-index: 10; }
+        .xhs-nav-btn:hover { background: rgba(255,255,255,0.4); }
+        .xhs-prev { left: 10px; } .xhs-next { right: 10px; }
+        .xhs-dots { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: center; gap: 6px; z-index: 10; }
+        .xhs-dot { width: 6px; height: 6px; background: rgba(255,255,255,0.4); border-radius: 50%; transition: 0.3s; cursor: pointer; }
+        .xhs-dot.active { background: #ff2442; width: 12px; border-radius: 4px; }
+        .xhs-info-container { width: 50%; height: 100%; padding: 20px; display: flex; flex-direction: column; border-left: 1px solid #2c2c2c; background: #121212; }
+        .xhs-caption-wrap { flex: 1; overflow-y: auto; padding-right: 10px; margin-bottom: 15px; }
+        .xhs-caption-wrap::-webkit-scrollbar { width: 5px; } .xhs-caption-wrap::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; } .xhs-caption-wrap::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; } .xhs-caption-wrap::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+        .xhs-text-content { font-size: 0.95rem; line-height: 1.7; color: #f1f1f1; white-space: pre-wrap; }
+        .xhs-text-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: #ffffff; line-height: 1.4; }
+        .xhs-actions { padding-top: 15px; border-top: 1px solid #2c2c2c; display: flex; align-items: center; gap: 20px; color: #ccc; font-size: 1.1rem; }
+        .xhs-actions span { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; } .xhs-actions i { cursor: pointer; transition: 0.2s; } .xhs-actions i:hover { color: #ff2442; } .xhs-share { margin-left: auto; }
+
+       /* ================= 手機版適應 ================= */
+       @media (max-width: 850px) {
+            body { padding: 15px 10px; } .portfolio-container { padding: 25px 15px; } .project-card { padding: 15px 12px; }
+            h1 { font-size: 1.7rem; margin-bottom: 25px; } h2 { font-size: 1.3rem; margin-top: 30px; margin-bottom: 15px; }
+            .xhs-mockup { height: auto; flex-direction: column; margin-top: 15px; } .xhs-carousel-container { width: 100%; height: 400px; } .xhs-info-container { width: 100%; height: 400px; border-left: none; border-top: 1px solid #2c2c2c; }
+            
+            .social-platform-card { flex-direction: column; text-align: center; }
+            .social-platform-text { flex: 1; width: 100%; }
+            .social-platform-text h4 { justify-content: center; }
+            .social-platform-media { width: 100%; }
+            
+            .workflow-container { flex-direction: column; gap: 20px; } .workflow-arrow { transform: rotate(90deg); } .workflow-step { width: 100%; max-width: 250px; }
+            .btn-group { flex-direction: column; width: 100%; } .preview-btn, .external-link-btn { justify-content: center; width: 100%; }
+            .article-modal-content { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-container">
+        <h1>作品集 Portfolio</h1>
+
+        <section>
+            <h2>1. 數據驅動與社群影響力 (Social Media & Data Impact)</h2>
+            
+            <div class="project-card">
+                <h3>專案一：咖啡廳主題自媒體經營</h3>
+                <p><span class="highlight">背景與挑戰：</span> 在社群平台自然演算法競爭激烈的環境下，新成立的個人品牌帳號初期缺乏知名度，難以快速觸及目標受眾。需要在零廣告預算的限制下，建立獨特的視覺記憶點，並找出能引發高度共鳴的內容切角來帶動流量。</p>
+                
+                <div class="xhs-mockup">
+                    <div class="xhs-carousel-container">
+                        <div class="xhs-slides-track" id="xhs-track">
+                            <div class="xhs-slide"><img src="img/one.jpg" alt="Photo 1"></div>
+                            <div class="xhs-slide"><img src="img/two.jpg" alt="Photo 2"></div>
+                            <div class="xhs-slide"><img src="img/three.jpg" alt="Photo 3"></div>
+                            <div class="xhs-slide"><img src="img/four.jpg" alt="Photo 4"></div>
+                            <div class="xhs-slide"><img src="img/five.jpg" alt="Photo 5"></div>
+                            <div class="xhs-slide"><img src="img/six.jpg" alt="Photo 6"></div>
+                            <div class="xhs-slide"><img src="img/seven.jpg" alt="Photo 7"></div>
+                            <div class="xhs-slide"><img src="img/eight.jpg" alt="Photo 8"></div>
+                            <div class="xhs-slide"><img src="img/nine.jpg" alt="Photo 9"></div>
+                            <div class="xhs-slide"><img src="img/ten.jpg" alt="Photo 10"></div>
+                        </div>
+                        <button class="xhs-nav-btn xhs-prev" onclick="changeSlide(-1)">❮</button>
+                        <button class="xhs-nav-btn xhs-next" onclick="changeSlide(1)">❯</button>
+                        <div class="xhs-dots" id="xhs-dots-container"></div>
+                    </div>
+
+                    <div class="xhs-info-container">
+                        <div class="xhs-caption-wrap">
+                            <div class="xhs-text-title">挑戰分享一百間適合遠距辦公的臺北咖啡廳～</div>
+                            <div class="xhs-text-content">【挑戰分享一百間適合遠距辦公讀書的臺北咖啡廳】
+-
+📜重要資訊及店家評分在文末！
+記得看到最後喔🪄
+-
+（1/100）
+-☕️ 店名：
+A DAY Cafe（初訪）
+-📍地點：
+忠孝復興捷運站
+位於忠孝東路三段、靠近市民大道
+東區巷弄尾端靜謐的小社區公園旁
+離捷運站有點距離🚉（700公尺）
+但附近大樓有汽車停車位
+路邊也有機車停車格🅿️
+-🌿空間氛圍
+風格是韓系奶油風，採光好！有大片落地窗
+座位都是靠牆的，很適合不被打擾的辦公！
+有區分內外空間 ，i 人 e人都適合👩‍💻
+☑️非常適合讀書、辦公做事💼
+☑️要來拍韓系網美照也可以
+-🥨飲食：
+-飲品🍵
+今日點了西西里咖啡 180$
+口味適中（不太甜也不太苦）
+-餐點🥘
+未提供鹹點，店內有「今日甜點」的標示可以問老闆！
+-📜重要資訊及推薦程度
+-營業時間：
+11:00–19:00🕰️
+-有無用餐時間限制：
+無⌛️
+-有無插頭、網路：🌕🌕🌕🌕
+特定座位有110v插座
+店內提供wifi🛜
+-安靜程度：🌕🌕🌕🌕🌗
+（造訪時間為平日下午，沒有其他客人，店內環境非常安靜）
+-背景音樂：🌕🌕🌕（代表音量大小）
+音樂聽得很清楚，但不會吵，風格是輕柔的傳統咖啡廳爵士音樂🎺
+-如廁環境：🌕🌕🌕🌕🌕
+📌推薦程度：🌕🌕🌕🌕🌗
+整體環境舒適安靜，除了交通稍微不便、音樂偏大聲以外，非常推薦！！
+
+#舒适的咖啡店 #台北探店 #台北咖啡廳 #台北景點 #遠距辦公咖啡廳 #讀書咖啡廳 #台北讀書咖啡廳
+<span style="color: #888; font-size: 0.85rem; display: block; margin-top: 15px;">2025/3/4</span></div>
+                        </div>
+                        
+                        <div class="xhs-actions">
+                            <span><i class="fa-regular fa-heart"></i> 118</span>
+                            <span><i class="fa-regular fa-star"></i> 109</span>
+                            <span><i class="fa-regular fa-comment"></i> 2</span>
+                            <span class="xhs-share"><i class="fa-solid fa-share-nodes"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-platform-card" style="margin-top: 20px;">
+                    <div class="social-platform-text" style="flex: 1 1 auto; max-width: 100%;">
+                        <h4><i class="fa-solid fa-book-bookmark" style="color: #ff2442;"></i> 小紅書執行策略</h4>
+                        <p>針對小紅書，將著重提供店家詳細資訊與交通指南等實用內容，藉由資訊的完整度來提升貼文收藏率。</p>
+                    </div>
+                </div>
+
+                <div class="social-section-title"></div>
+                
+                <div class="social-platform-card">
+                    <div class="social-platform-text">
+                        <h4><i class="fa-brands fa-instagram" style="color: #E1306C;"></i> Instagram 短影音策略</h4>
+                        <p>Instagram 則主攻短影音策略，運用輕量化的影像搭配時下熱門的 Reels 音樂，順應演算法機制極大化推播效益。</p>
+                    </div>
+                    <div class="social-platform-media ig-media">
+                        <video controls autoplay loop muted playsinline style="max-height: 450px; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 1px solid #eee;">
+                            <source src="img/copy_CFB1EAD8-F3B3-4EF1-A8B2-4A7EA309C06A.mov">
+                            您的瀏覽器不支援影片標籤。
+                        </video>
+                    </div>
+                </div>
+
+                <div class="image-production-section" style="margin-top: 20px;">
+                    <div class="section-header">
+                        <div class="article-meta-tag" style="margin-bottom: 0;"><i class="fa-brands fa-threads"></i> Threads 串文精選</div>
+                        <span class="swipe-hint"><i class="fa-solid fa-angles-right"></i> 向右滑動查看更多</span>
+                    </div>
+                    <div class="horizontal-scroll-container">
+                        <img src="img/threads1.jpg" alt="Threads 爆款串文" class="scroll-img" onclick="openImageModal('img/threads1.jpg', 'Threads 爆款串文（30萬次瀏覽）')">
+                        <img src="img/threads2.jpg" alt="Threads 流量數據" class="scroll-img" onclick="openImageModal('img/threads2.jpg', 'Threads 流量數據 30萬次瀏覽')">
+                    </div>
+                </div>
+
+                <div class="social-platform-card" style="margin-top: 20px;">
+                    <div class="social-platform-text" style="flex: 1 1 auto; max-width: 100%;">
+                        <h4><i class="fa-brands fa-threads" style="color: #000000;"></i> Threads 圖文共鳴策略</h4>
+                        <p>Threads 則主攻日常共鳴策略，運用充滿生活感的隨筆文字搭配高質感的情境照片，順應平台重視文字交流與分享串聯的演算法機制，成功創下 30 萬瀏覽次數的極大化推播效益。</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="project-card" style="border-color: var(--accent-color); border-width: 2px;">
+                <h3>專案二: 「運動女孩」社群視覺與 SEO 內容行銷</h3> 
+                <p><span class="highlight">背景與目標：</span> 品牌需要產出大量且風格一致的社群圖文，並希望透過內容行銷 (Content Marketing)，在競爭激烈的戶外領域中提升品牌的自然搜尋 (Organic Search) 能見度。</p>
+                <p><span class="highlight">執行策略：</span> 主導圖文設計與協助文章撰寫。我針對目標受眾的痛點與需求進行企劃，將複雜的戶外知識轉化為易讀、高質感的社群圖文；同時在長篇文章中進行精準的關鍵字佈局，確保內容兼具視覺美感與 SEO 架構。</p>
+                
+                <p><span class="highlight">專案成效：</span> 高效產出 30 份優質的行銷與社群素材。透過精準的內容策略，成功讓我撰寫的文章在核心關鍵字（如：「登山 穿搭 女生」）的 Google 搜尋結果中強勢攻佔第一名，實際透過高質量的內容為品牌帶來長期的長尾流量與精準曝光。</p>
+                
+                <div class="branding-logo-box" style="margin-top: 15px; margin-bottom: 25px;">
+                    <img src="img/image_2537c9.png" alt="Google 搜尋排名第一" onclick="openImageModal('img/image_2537c9.png', '核心關鍵字 Google 搜尋第一名')">
+                </div>
+
+                <div class="article-preview-card">
+                    <div class="article-meta-tag"><i class="fa-solid fa-pen-nib"></i> 內容企劃與文案撰寫 (Copywriting)</div>
+                    <h4 class="article-title">最強運動妝容！運動時化妝一定要注意的4個小細節！</h4>
+                    <p class="article-excerpt">在妳的印象當中，每次自己運動後是不是感覺非常狼狽呢？每次看到有上傳自己運動後的美美的照片都覺得不可思議，為什麼自己運動後都看起來蓬頭垢面、狼狽不堪呢？今天Ｉ編就要帶大家解密這些小細節，教妳怎麼化出「完美偽素顏」妝容...</p>
+                    <div class="btn-group">
+                        <button class="preview-btn" onclick="openArticleModal()"><i class="fa-solid fa-magnifying-glass"></i> 預覽文章片段</button>
+                        <a href="https://www.sweatandsweet.com/blog/izzy-spoet-makeup-detail" target="_blank" class="external-link-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> 完整網站</a>
+                    </div>
+                </div>
+
+                <div class="image-production-section">
+                    <div class="section-header">
+                        <div class="article-meta-tag" style="margin-bottom: 0;"><i class="fa-solid fa-palette"></i> 視覺素材設計 (Image Production)</div>
+                        <span class="swipe-hint"><i class="fa-solid fa-angles-right"></i> 向右滑動查看系列作品</span>
+                    </div>
+                    <div class="horizontal-scroll-container">
+                        <img src="img/sportgirl1.png" alt="夏天穿搭" class="scroll-img" onclick="openImageModal('img/sportgirl1.png', '夏天穿搭圖文設計')">
+                        <img src="img/sportgirl2.png" alt="冬天穿搭" class="scroll-img" onclick="openImageModal('img/sportgirl2.png', '冬天洋蔥式穿搭設計')">
+                        <img src="img/sportgirl3.png" alt="腰圍量法" class="scroll-img" onclick="openImageModal('img/sportgirl3.png', '身體尺寸量法大公開')">
+                        <img src="img/sportgirl4.png" alt="克服心法" class="scroll-img" onclick="openImageModal('img/sportgirl4.png', '跑步克服懶惰心法')">
+                        <img src="img/sportgirl5.png" alt="睡前運動" class="scroll-img" onclick="openImageModal('img/sportgirl5.png', '睡前五個運動動作')">
+                        <img src="img/sportgirl6.png" alt="手掌算法" class="scroll-img" onclick="openImageModal('img/sportgirl6.png', '食物熱量手掌算法')">
+                        <img src="img/sportgirl7.png" alt="低GI食物" class="scroll-img" onclick="openImageModal('img/sportgirl7.png', '認識低GI食物與健身餐')">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. 品牌識別與視覺系統 (Branding & Visual Identity)</h2>
+            
+            <div class="project-card">
+                <h3>專案一: 政大轉聯會視覺重塑與模板化工程</h3>
+                <p><span class="highlight">背景與挑戰：</span> 組織過去缺乏統一的視覺規範，導致對外形象發散，且每次活動宣傳都需要重新設計，內部溝通與修改的成本極高。</p>
+                <p><span class="highlight">執行策略：</span> 主導轉聯會視覺形象重塑，獨立設計官方 Logo 與全套 IG/FB 社群圖文模板。擔任公關與活動組的溝通橋樑，將繁雜的活動資訊轉化為易讀的社群素材格式。</p>
+                <p><span class="highlight">專案成效：</span> 成功在全平台建立專業且一致的品牌形象。透過導入設計模板與明確的「對焦需求」流程，大幅降低了跨部門的溝通摩擦與設計修改成本。</p>
+                
+                <div class="branding-logo-box">
+                    <img src="img/nccu_tsf.png" alt="政大轉聯會 Logo 視覺重塑" onclick="openImageModal('img/nccu_tsf.png', '政大轉聯會 Logo 設計')">
+                    <div class="logo-label">Logo 設計</div>
+                </div>
+
+                <div class="image-production-section" style="margin-top: 30px;">
+                    <div class="section-header">
+                        <div class="article-meta-tag" style="margin-bottom: 0;"><i class="fa-solid fa-gift"></i> 社群圖文模板－抽獎文</div>
+                        <span class="swipe-hint"><i class="fa-solid fa-angles-right"></i> 向右滑動查看</span>
+                    </div>
+                    <div class="horizontal-scroll-container">
+                        <img src="img/3_0.png" alt="抽獎文1" class="scroll-img" onclick="openImageModal('img/3_0.png', '社群圖文模板－抽獎文 01')">
+                        <img src="img/4_0.png" alt="抽獎文2" class="scroll-img" onclick="openImageModal('img/4_0.png', '社群圖文模板－抽獎文 02')">
+                        <img src="img/5_0.png" alt="抽獎文3" class="scroll-img" onclick="openImageModal('img/5_0.png', '社群圖文模板－抽獎文 03')">
+                        <img src="img/6_0.png" alt="抽獎文4" class="scroll-img" onclick="openImageModal('img/6_0.png', '社群圖文模板－抽獎文 04')">
+                    </div>
+                </div>
+
+                <div class="image-production-section" style="margin-top: 25px;">
+                    <div class="section-header">
+                        <div class="article-meta-tag" style="margin-bottom: 0;"><i class="fa-solid fa-hourglass-half"></i> 社群圖文模板－活動倒數文</div>
+                        <span class="swipe-hint"><i class="fa-solid fa-angles-right"></i> 向右滑動查看</span>
+                    </div>
+                    <div class="horizontal-scroll-container">
+                        <img src="img/7_0.png" alt="倒數3天" class="scroll-img" onclick="openImageModal('img/7_0.png', '社群圖文模板－活動倒數 03')">
+                        <img src="img/8_0.png" alt="倒數2天" class="scroll-img" onclick="openImageModal('img/8_0.png', '社群圖文模板－活動倒數 02')">
+                        <img src="img/9_0.png" alt="倒數1天" class="scroll-img" onclick="openImageModal('img/9_0.png', '社群圖文模板－活動倒數 01')">
+                    </div>
+                </div>
+
+                <div class="image-production-section" style="margin-top: 25px;">
+                    <div class="section-header">
+                        <div class="article-meta-tag" style="margin-bottom: 0;"><i class="fa-solid fa-handshake"></i> 社群圖文模板－贊助廠商</div>
+                        <span class="swipe-hint"><i class="fa-solid fa-angles-right"></i> 向右滑動查看</span>
+                    </div>
+                    <div class="horizontal-scroll-container">
+                        <img src="img/10_0.png" alt="贊助廠商1" class="scroll-img" onclick="openImageModal('img/10_0.png', '社群圖文模板－贊助廠商 01')">
+                        <img src="img/11_0.png" alt="贊助廠商2" class="scroll-img" onclick="openImageModal('img/11_0.png', '社群圖文模板－贊助廠商 02')">
+                        <img src="img/12_0.png" alt="贊助廠商3" class="scroll-img" onclick="openImageModal('img/12_0.png', '社群圖文模板－贊助廠商 03')">
+                        <img src="img/13_0.png" alt="贊助廠商4" class="scroll-img" onclick="openImageModal('img/13_0.png', '社群圖文模板－贊助廠商 04')">
+                        <img src="img/14_0.png" alt="贊助廠商5" class="scroll-img" onclick="openImageModal('img/14_0.png', '社群圖文模板－贊助廠商 05')">
+                        <img src="img/15_0.png" alt="贊助廠商6" class="scroll-img" onclick="openImageModal('img/15_0.png', '社群圖文模板－贊助廠商 06')">
+                        <img src="img/16_0.png" alt="贊助廠商7" class="scroll-img" onclick="openImageModal('img/16_0.png', '社群圖文模板－贊助廠商 07')">
+                        <img src="img/17_0.png" alt="贊助廠商8" class="scroll-img" onclick="openImageModal('img/17_0.png', '社群圖文模板－贊助廠商 08')">
+                        <img src="img/18_0.png" alt="贊助廠商9" class="scroll-img" onclick="openImageModal('img/18_0.png', '社群圖文模板－贊助廠商 09')">
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>專案二: 吳宗憲建築師事務所 Logo 與 CIS 設計</h3>
+                <p><span class="highlight">背景與目標：</span> 事務所需要建立更具專業度與鑑別度的品牌標誌，以利對外企業形象的推廣與業務接洽。</p>
+                <p><span class="highlight">執行策略：</span> 精準梳理事務所的核心建築理念，深入分析設計風格與市場定位，將生硬的建築語彙轉譯為簡潔俐落的 Logo 視覺設計。</p>
+                <p><span class="highlight">專案成效：</span> 產出具備高識別度的品牌標誌，建立專業且一致的對外企業形象，有效提升事務所對外溝通的視覺質感。</p>
+                
+                <div class="branding-logo-box">
+                    <img src="img/danyi_design.png" alt="吳宗憲建築師事務所 Logo 視覺設計" onclick="openImageModal('img/danyi_design.png', '吳宗憲建築師事務所 Logo 與 CIS 設計')">
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. 資訊視覺化與科技賦能 (Info-Design & AI Integration)</h2>
+            <div class="project-card">
+                <h3>專案一: 結合 AI 工具的敏捷視覺產製流程</h3>
+                <p><span class="highlight">背景與挑戰：</span> 為了推廣開源設計軟體，需要產出一套結構完整的「Inkscape Logo 設計教學影片」與搭配的教學簡報。若採用傳統流程進行影片聽打、時間軸梳理與簡報從零排版，將耗費大量作業時間。</p>
+                <p><span class="highlight">執行策略：</span> 建立一套高效的跨平台 AI 工作流 (AI Workflow)，在確保教學內容易懂度與視覺美感的前提下，極大化地縮短多媒體教材的產製週期。<br><br>
+                我親自錄製並剪輯教學影片，隨後導入端到端 (End-to-End) 的 AI協作流程：<br>
+                1. <b>智慧影音處理</b>：運用 CapCut 智慧語音辨識快速生成並校對教學字幕。<br>
+                2. <b>資訊萃取與結構化</b>：將腳本匯入 Gemini 進行內容解析，精準抓取核心重點並自動生成影片時間軸 (Timestamps)。<br>
+                3. <b>視覺生成與精修</b>：將 Gemini 梳理出的邏輯架構餵給 Gamma 瞬間產出簡報初稿，最後匯入 Canva 進行細部排版與視覺美感微調。</p>
+                <p><span class="highlight">專案成效：</span> 成功打破單一軟體限制，將冗長的後製與排版時間大幅壓縮，高效產出具備專業質感的結構化多媒體教材。此專案不僅證明了我的數位工具整合能力，更實證了如何靈活運用 AI 優化日常營運流程，完美契合未來職場對 AI 協作力 (AI Readiness) 的要求。</p>
+                
+                <div class="workflow-title-box">影片製作流程</div>
+                <div class="workflow-container">
+                    <div class="workflow-step clickable-step" onclick="openImageModal('img/step1.png', '影片錄製畫面')">
+                        <div class="step-number">1</div>
+                        <div class="step-icon"><i class="fa-solid fa-video"></i></div>
+                        <div class="step-divider"></div>
+                        <div class="step-title">影片錄製</div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="workflow-step clickable-step" onclick="openImageModal('img/step2.png', 'CapCut 智慧上字幕')">
+                        <div class="step-number">2</div>
+                        <div class="step-icon"><i class="fa-regular fa-comment-dots"></i></div>
+                        <div class="step-divider"></div>
+                        <div class="step-title">CapCut</div>
+                        <div class="step-subtitle">(上字幕)</div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="workflow-step clickable-step" onclick="openImageModal('img/step3.png', 'Gemini 生成影片時間軸')">
+                        <div class="step-number">3</div>
+                        <div class="step-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="step-divider"></div>
+                        <div class="step-title">Gemini</div>
+                        <div class="step-subtitle">(抓時間軸)</div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="workflow-step clickable-step" onclick="openImageModal('img/step4.png', 'Gamma 自動生成簡報')">
+                        <div class="step-number">4</div>
+                        <div class="step-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        <div class="step-divider"></div>
+                        <div class="step-title">Gamma</div>
+                        <div class="step-subtitle">(生成簡報)</div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="workflow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-icon"><i class="fa-solid fa-palette"></i></div>
+                        <div class="step-divider"></div>
+                        <div class="step-title">Canva</div>
+                        <div class="step-subtitle">(美感微調)</div>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: 30px;">
+                    <a href="https://youtu.be/Wcchm-v301s" target="_blank" style="color: var(--accent-color); text-decoration: none; font-weight: bold; padding: 10px 20px; border: 2px solid var(--accent-color); border-radius: 30px; transition: 0.3s; display: inline-block;">
+                        <i class="fa-brands fa-youtube"></i> 點此前往 YouTube 觀看教學
+                    </a>
+                </p>
+            </div>
+            <div class="project-card">
+                <h3>專案二: 建築設計專案的高階視覺化提案</h3>
+                <p><span class="highlight">背景與挑戰：</span> 參與大型公部門標案時，內部同仁產出的初始提案簡報往往充滿繁雜文字，或僅用粗糙的牽線來標示照片重點。這種枯燥且缺乏設計感的排版，導致資訊可讀性極低，容易削弱事務所在提案時的專業度與競爭力。</p>
+                <p><span class="highlight">執行策略：</span> 負責重新定調標案簡報的視覺呈現邏輯，必須將生硬、零散的空間設計概念，轉化為評審與客戶能「一眼看懂」且具備高質感的視覺化提案。<br><br>
+                我徹底重構了簡報的視覺系統。捨棄傳統「實景照片+牽線文字」的雜亂做法，改採高質感的「線條插畫 (Line Art)」來呈現空間透視感；同時導入 Icon 圖示化設計 (如：採光、落地窗、設施)，並運用模組化的網格排版重新梳理資訊層級，將長篇大論提煉為精華亮點。</p>
+                <p><span class="highlight">專案成效：</span> 成功將無聊枯燥的原始資料，轉化為乾淨、專業的視覺化商業簡報。不僅大幅提升了資訊的閱讀流暢度，更精準傳達了「以人為本」的設計理念，有效強化事務所在大型標案競圖中的視覺說服力與整體質感。</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. 跨界企劃與專案管理 (Project Management & Planning)</h2>
+            <div class="project-card">
+                <h3>專案: 中原大學期初成果展 (零到一的資源整合與時程控管)</h3>
+                <p><span class="highlight">Situation (情境)：</span> 作為大型校園展覽的核心統籌，面臨活動籌備期緊湊、跨部門溝通複雜，且初期缺乏足夠活動經費的挑戰。</p>
+                <p><span class="highlight">Task (任務)：</span> 確保設計與實體產出如期達標，並主動開發外部資源以填補資金缺口。</p>
+                <p><span class="highlight">Action (行動)：</span> 對外，撰寫企劃書並實地拜訪超過 50 家在地商家進行贊助洽談。對內，運用進度條與自動化追蹤的邏輯拆解複雜任務，統籌各項專案時程 (Timeline)。定期召開跨組「對焦會議」，將抽象想法轉化為具體設計規格。</p>
+                <p><span class="highlight">Result (結果)：</span> 透過靈活的談判成功爭取到活動經費與物資，有效降低成本。帶領團隊在緊湊期限內 100% 準時交件，確保前期主視覺到後期實體大圖輸出，皆在有限預算內完美落地。</p>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
+        <span class="close-modal" onclick="closeImageModal(event)">&times;</span>
+        <img class="modal-content" id="modalImg" style="object-fit: contain;">
+        <div id="modalHint" class="modal-hint"></div>
+    </div>
+
+    <div id="articleModal" class="image-modal" style="display: none;" onclick="closeArticleModal(event)">
+        <div class="article-modal-content">
+            <span class="close-modal" onclick="closeArticleModal(event)">&times;</span>
+            <h2>最強運動妝容！運動時化妝一定要注意的4個小細節！</h2>
+            <div style="margin-bottom: 20px; color: #888; font-size: 0.9rem;">
+                <i class="fa-solid fa-user-pen"></i> Written By Izzy • 運動生活板塊
+            </div>
+            <div class="article-body">
+                <p>在妳的印象當中，每次自己運動後是不是感覺非常狼狽呢？每次看到別人上傳自己運動後美美的照片都覺得不可思議，為什麼自己運動後都看起來蓬頭垢面、狼狽不堪呢？我也好想運動時能保持美美的～～>ʍ<！</p>
+                <p>其實這些美照的背後其實也藏有一些小秘訣！有些人可能使用了比較清透自然的底妝、或者是用了一些化妝技巧讓自己看起來像是「偽素顏」一樣。</p>
+                <p>今天就要帶大家解密這些小細節，教妳怎麼化出「完美偽素顏」妝容，讓妳在運動時也能保持漂亮，還會告訴妳就算運動後大爆汗，也能夠保持完美妝容的小秘密。讓我們和脫妝浮粉說再見～</p>
+                <hr style="margin: 25px 0; border: 0; border-top: 1px dashed #ccc;">
+                <h4 style="color: var(--sidebar-bg); font-size: 1.15rem; margin-bottom: 15px;"><i class="fa-solid fa-lightbulb" style="color: #F9A826;"></i> 潤色隔離/校色乳該怎麼選擇？</h4>
+                <ul style="color: #555;">
+                    <li><strong>白色：</strong> 修飾毛孔，讓膚質看起來更加平滑，可用來提亮、提升臉部及五官輪廓立體度。</li>
+                    <li><strong>藍/紫色：</strong> 改善蠟黃的膚色，可用於黑眼圈校色或膚色蠟黃處。</li>
+                    <li><strong>綠色：</strong> 改善痘痘或過敏等肌膚問題帶來的皮膚泛紅，讓皮膚提升透明感！</li>
+                    <li><strong>紅/粉色：</strong> 適合皮膚白皙的人，可以讓白皙的妳提升仙氣感，使氣色更紅潤.</li>
+                </ul>
+            </div>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="https://www.sweatandsweet.com/blog/izzy-spoet-makeup-detail" target="_blank" class="preview-btn" style="text-decoration: none; padding: 12px 30px; border-radius: 30px;">
+                    閱讀網站完整全文 <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================= 小紅書卡片輪播邏輯 =================
+        const totalSlides = 10;
+        let currentSlideIndex = 0;
+        const track = document.getElementById('xhs-track');
+        const dotsContainer = document.getElementById('xhs-dots-container');
+
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = `xhs-dot ${i === 0 ? 'active' : ''}`;
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+        
+        const dots = document.querySelectorAll('.xhs-dot');
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideIndex);
+            });
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex < 0) { currentSlideIndex = totalSlides - 1; } 
+            else if (currentSlideIndex >= totalSlides) { currentSlideIndex = 0; }
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            updateSlider();
+        }
+
+        // ================= 圖片彈出視窗邏輯 =================
+        function openImageModal(imageSrc, hintText) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            const modalHint = document.getElementById('modalHint');
+            
+            modal.style.display = "flex";
+            modalImg.src = imageSrc;
+            modalHint.innerText = hintText;
+        }
+
+        function closeImageModal(event) {
+            if (event.target.id === 'imageModal' || event.target.classList.contains('close-modal')) {
+                document.getElementById('imageModal').style.display = "none";
+            }
+        }
+
+        // ================= 文章文字彈出視窗邏輯 =================
+        function openArticleModal() {
+            const modal = document.getElementById('articleModal');
+            modal.style.display = "flex";
+        }
+
+        function closeArticleModal(event) {
+            if (event.target.id === 'articleModal' || event.target.classList.contains('close-modal')) {
+                document.getElementById('articleModal').style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

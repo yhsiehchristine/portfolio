@@ -250,7 +250,75 @@
         .xhs-text-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 15px; color: #ffffff; line-height: 1.4; }
         .xhs-actions { padding-top: 15px; border-top: 1px solid #2c2c2c; display: flex; align-items: center; gap: 20px; color: #ccc; font-size: 1.1rem; }
         .xhs-actions span { display: flex; align-items: center; gap: 6px; font-size: 0.9rem; } .xhs-actions i { cursor: pointer; transition: 0.2s; } .xhs-actions i:hover { color: #ff2442; } .xhs-share { margin-left: auto; }
-
+/* ================= Before/After 比較組件 ================= */
+.before-after-wrapper { 
+            display: flex; 
+            gap: 25px; 
+            margin-top: 35px; 
+            margin-bottom: 10px;
+            flex-wrap: wrap; 
+            align-items: stretch; /* 確保左右兩邊容器等高 */
+        }
+        .compare-box { 
+            flex: 1; 
+            min-width: 280px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .compare-img-container { 
+            width: 100%; 
+            aspect-ratio: 4 / 3; /* 關鍵解法：強制統一長寬比，保證框框一樣大 */
+            border-radius: 8px; 
+            overflow: hidden; 
+            background: #fff; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06); 
+            position: relative; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .compare-img-container img { 
+            width: 100%; 
+            height: 100%;
+            object-fit: contain; /* 確保圖片完整顯示，不夠的地方自動留白 */
+            display: block; 
+            cursor: zoom-in; 
+            transition: transform 0.3s ease; 
+        }
+        .compare-img-container img:hover { 
+            transform: scale(1.03); 
+        }
+        .compare-label { 
+            position: absolute; 
+            top: 15px; 
+            left: 15px; 
+            padding: 4px 12px; 
+            font-weight: bold; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            color: #fff; 
+            z-index: 2; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15); 
+            letter-spacing: 1px;
+        }
+        .label-before { background-color: #999; }
+        .label-after { background-color: var(--accent-color); }
+        
+        .compare-caption { 
+            margin-top: auto; /* 讓文字自動貼齊底部 */
+            padding-top: 20px;
+            font-weight: bold; 
+            font-size: 1.05rem; 
+            text-align: center; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .compare-box.before .compare-caption { color: #777; }
+        .compare-box.after .compare-caption { color: var(--sidebar-bg); }
+        .compare-box.after .compare-img-container { border: 2px solid var(--accent-color); }
+        .compare-box.before .compare-img-container { border: 1px solid #ddd; }
        /* ================= 手機版適應 ================= */
        @media (max-width: 850px) {
             body { padding: 15px 10px; } .portfolio-container { padding: 25px 15px; } .project-card { padding: 15px 12px; }
@@ -505,6 +573,7 @@ A DAY Cafe（初訪）
                 
                 <div class="branding-logo-box">
                     <img src="img/danyi_design.png" alt="吳宗憲建築師事務所 Logo 視覺設計" onclick="openImageModal('img/danyi_design.png', '吳宗憲建築師事務所 Logo 與 CIS 設計')">
+                    <div class="logo-label">Logo 設計</div>
                 </div>
             </div>
         </section>
@@ -575,7 +644,29 @@ A DAY Cafe（初訪）
                 <p><span class="highlight">執行策略：</span> 負責重新定調標案簡報的視覺呈現邏輯，必須將生硬、零散的空間設計概念，轉化為評審與客戶能「一眼看懂」且具備高質感的視覺化提案。<br><br>
                 我徹底重構了簡報的視覺系統。捨棄傳統「實景照片+牽線文字」的雜亂做法，改採高質感的「線條插畫 (Line Art)」來呈現空間透視感；同時導入 Icon 圖示化設計 (如：採光、落地窗、設施)，並運用模組化的網格排版重新梳理資訊層級，將長篇大論提煉為精華亮點。</p>
                 <p><span class="highlight">專案成效：</span> 成功將無聊枯燥的原始資料，轉化為乾淨、專業的視覺化商業簡報。不僅大幅提升了資訊的閱讀流暢度，更精準傳達了「以人為本」的設計理念，有效強化事務所在大型標案競圖中的視覺說服力與整體質感。</p>
-            </div>
+
+                <div class="before-after-wrapper">
+                    <div class="compare-box before">
+                        <div class="compare-img-container">
+                            <span class="compare-label label-before">BEFORE</span>
+                            <img src="img/image_42402b.png" alt="Before 傳統簡報" onclick="openImageModal('img/image_42402b.png', 'Before: 缺乏層次、閱讀疲勞的傳統簡報')">
+                        </div>
+                        <div class="compare-caption">
+                            <i class="fa-solid fa-file-image"></i> Before: 缺乏層次、閱讀疲勞的傳統簡報
+                        </div>
+                    </div>
+
+                    <div class="compare-box after">
+                        <div class="compare-img-container">
+                            <span class="compare-label label-after">AFTER</span>
+                            <img src="img/image_42400f.png" alt="After 專業提案" onclick="openImageModal('img/image_42400f.png', 'After: 資訊重構、視覺升級的專業提案')">
+                        </div>
+                        <div class="compare-caption">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-color);"></i> After: 資訊重構、視覺升級的專業提案
+                        </div>
+                    </div>
+                </div>
+                </div>
         </section>
 
         <section>

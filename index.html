@@ -417,6 +417,71 @@
         .compare-box.after .compare-caption { color: var(--sidebar-bg); }
         .compare-box.after .compare-img-container { border: 2px solid var(--accent-color); }
         .compare-box.before .compare-img-container { border: 1px solid #ddd; }
+        /* ================= 專案管理 Dashboard 連結卡片 ================= */
+        .dashboard-link-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 5px solid var(--sidebar-bg); /* 深藍色邊框強調專業感 */
+            padding: 20px 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .dashboard-link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+        .dashboard-info {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .dashboard-icon {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            background: #fff;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            flex-shrink: 0;
+        }
+        .dashboard-text h4 {
+            margin: 0 0 5px 0;
+            color: var(--sidebar-bg);
+            font-size: 1.15rem;
+            font-weight: bold;
+        }
+        .dashboard-text p {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        .dashboard-btn {
+            background-color: var(--sidebar-bg);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .dashboard-btn:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
        /* ================= 手機版適應 ================= */
        @media (max-width: 850px) {
             body { padding: 15px 10px; } .portfolio-container { padding: 25px 15px; } .project-card { padding: 15px 12px; }
@@ -427,6 +492,8 @@
             .social-platform-text { flex: 1; width: 100%; }
             .social-platform-text h4 { justify-content: center; }
             .social-platform-media { width: 100%; }
+            .dashboard-link-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .dashboard-btn { width: 100%; justify-content: center; }
             
             .workflow-container { flex-direction: column; gap: 20px; } .workflow-arrow { transform: rotate(90deg); } .workflow-step { width: 100%; max-width: 250px; }
             .btn-group { flex-direction: column; width: 100%; } .preview-btn, .external-link-btn { justify-content: center; width: 100%; }
@@ -798,6 +865,22 @@ A DAY Cafe（初訪）
                 <p><span class="highlight">Task (任務)：</span> 確保設計與實體產出如期達標，並主動開發外部資源以填補資金缺口。</p>
                 <p><span class="highlight">Action (行動)：</span> 對外，撰寫企劃書並實地拜訪超過 50 家在地商家進行贊助洽談。對內，運用進度條與自動化追蹤的邏輯拆解複雜任務，統籌各項專案時程 (Timeline)。定期召開跨組「對焦會議」，將抽象想法轉化為具體設計規格。</p>
                 <p><span class="highlight">Result (結果)：</span> 透過靈活的談判成功爭取到活動經費與物資，有效降低成本。帶領團隊在緊湊期限內 100% 準時交件，確保前期主視覺到後期實體大圖輸出，皆在有限預算內完美落地。</p>
+
+                <div class="dashboard-link-card">
+                    <div class="dashboard-info">
+                        <div class="dashboard-icon">
+                            <i class="fa-solid fa-chart-gantt"></i>
+                        </div>
+                        <div class="dashboard-text">
+                            <h4>專案管理 Dashboard 實體展示</h4>
+                            <p>點擊查看為此展覽專案搭建的數位化進度追蹤系統</p>
+                        </div>
+                    </div>
+                    <a href="https://yhsiehchristine.github.io/cycu-design-dashboard/" target="_blank" class="dashboard-btn">
+                        前往觀看 Live Demo <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+                
             </div>
         </section>
 
